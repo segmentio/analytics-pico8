@@ -11,8 +11,7 @@ do
   local offset = 0
 
   local function check()
-    -- we use byte 0x5fff for "flushing" the event.
-    if start+offset > 0x5ffe then assert(false, 'event is too large.') end
+    if start+offset > 0x5fff then assert(false, 'event is too large.') end
   end
 
   local function write_char(ch)
@@ -23,44 +22,48 @@ do
 
   local function write_bool(b)
     check()
-    poke(start+offset, b and 255 or 0)
+    poke(start+offset, b and 1 or 0)
     offset += 1
   end
 
-  local function write_num(n)
-    local s = tostr(n)
-    for i=1,#s do
-      write_char(sub(s,i,i))
-    end
-  end
-
-  local function write_str(s)
-    write_num(#s)
-    for i=1,#s do
-      write_char(sub(s,i,i))
-    end
+  local function write_uint8(n)
+    check()
+    poke(start+offset, n)
+    offset += 1
   end
 
   local function flush()
+    check()
     poke(start+offset, 255)
     offset = 0
   end
 
+  local function write_str(s)
+    write_uint8(#s)
+    for i=1,#s do write_char(sub(s,i,i)) end
+  end
+
   function track(event, properties)
     write_str(event)
-
     if properties == nil then
+      flush()
       return
     end
-
     for k,v in pairs(properties) do
       write_str(k)
-      if     type(v) == 'boolean' then write_bool(v)
-      elseif type(v) == 'number'  then write_num(v)
-      elseif type(v) == 'string'  then write_str(v)
-      else   assert(false, k .. ' must be a primitive.') end
+      if type(v) == 'boolean' then
+        write_uint8(0)
+        write_bool(v)
+      elseif type(v) == 'number' then
+        write_uint8(1)
+        write_str(tostr(v))
+      elseif type(v) == 'string' then
+        write_uint8(2)
+        write_str(v)
+      else
+        assert(false, k .. ' must be a primitive.')
+      end
     end
-
     flush()
   end
 end
