@@ -6,10 +6,14 @@ track.p8: track.lua
 	@cat track.lua >> track.p8
 
 # Transpile 'track.ts' to create 'track.lua'.
-track.lua:
-	@./node_modules/.bin/tstl -p tsconfig.json
+# track.lua: track.ts
+# 	@./node_modules/.bin/tstl -p tsconfig.json
 
 # Remove generated files.
-clean:
-	@rm track.p8
-	@rm track.lua
+# clean:
+# 	@rm track.p8
+# 	@rm track.lua
+
+# TODO: add lua block, tstl doesn't support
+# TODO: minify with picotool?
+# TODO: luacheck
