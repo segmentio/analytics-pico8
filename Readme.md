@@ -48,7 +48,7 @@ You can track as many events and properties as you want, subject to PICO-8's cha
 
 <br>
 
-### Export, insert `track.js` and `analytics.js`
+### Export, insert `track.html` and `analytics.js`
 
 In the PICO-8 console, export your game to HTML5:
 
@@ -62,7 +62,7 @@ Find your `<script>` tag in the generated HTML. It should look like this:
 <script async type="text/javascript" src="your_game.js"></script>
 ```
 
-Above it, insert the contents of [`track.js`](./track.js), then the [`analytics.js` snippet](https://segment.com/docs/sources/website/analytics.js/quickstart/) (in that order).
+Above it, insert the contents of [`track.html`](./track.html), then the [`analytics.js` snippet](https://segment.com/docs/sources/website/analytics.js/quickstart/) (in that order).
 
 You can reference [`track_test.html`](./track_test.html) as an example.
 
