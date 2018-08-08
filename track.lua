@@ -43,6 +43,7 @@ do
 
   local function flush()
     poke(start+offset, 255)
+    offset = 0
   end
 
   function track(event, properties)

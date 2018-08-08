@@ -86,13 +86,75 @@ canvas{
 
   <script>
 ;(function() {
+  // len, string
+  // 0, bool (1 byte)
+  // 1, len, num
+  // 2, len, string
+
+  var index = 0
+  var chars = ' !"#%\'()*+,-./0123456789:;<=>?abcdefghijklmnopqrstuvwxyz[]^_{~}'
+
+  function readByte(arr) {
+    var b = arr[index]
+    index++
+    return b
+  }
+
+  function readChar(arr) {
+    var charCode = arr[index]
+    index++
+    return chars[charCode-1]
+  }
+
+  function readString(arr) {
+    var strlen = readByte(arr)
+    var str = ''
+    for (var i = 0; i < strlen; i++) str += readChar(arr)
+    return str
+  }
+
+  function readNum(arr) {
+    var numStr = readString(arr)
+    return parseInt(numStr, 10)
+  }
+
+  function readBool(arr) {
+    return readByte(arr) > 0
+  }
+
+  function readValue(arr) {
+    var type = readByte(arr)
+    if (type === 0) return readBool(arr)
+    if (type === 1) return readNum(arr)
+    if (type === 2) return readString(arr)
+    throw new Error('Failed read.')
+  }
+
   function onTrack(o, onTrack) {
     return new Proxy(o, {
       set: function(target, property, value) {
-        var event = '' // TODO
-        var properties = {} // TODO
-        console.log('setting prop:', property)
-        if (value === 255) onTrack(event, properties)
+        if (value === 255) {
+          // Find "end-of-track" index.
+          var End = Number(property)
+
+          // Read event name.
+          var event = readString(target)
+
+          // Read properties.
+          var properties = {}
+          while (index < End) {
+            var key = readString(target)
+            var value = readValue(target)
+            properties[key] = value
+          }
+
+          // Reset offset.
+          index = 0
+
+          // Call onTrack handler.
+          onTrack(event, properties)
+        }
+
         target[property] = value
         return true
       },
