@@ -34,7 +34,7 @@ do
     end
   end
 
-  local function write_str(s) do
+  local function write_str(s)
     write_num(#s)
     for i=1,#s do
       write_char(sub(s,i,i))
