@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "typescript-to-lua": "^0.6.0"
-  },
-  "dependencies": {
-    "@wowts/tstolua": "^1.2.0"
-  }
-}

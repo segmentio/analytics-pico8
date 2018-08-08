@@ -68,8 +68,14 @@ do
   end
 end
 
-track('level completed', {
-  level = 4,
-  score = 9000,
-  found_secret = true,
-})
+--[[
+
+  example:
+
+    track('level completed', {
+      level = 4,
+      score = 9000,
+      found_secret = true,
+    })
+
+--]]
