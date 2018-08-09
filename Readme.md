@@ -1,6 +1,6 @@
 # analytics-pico8
 
-`<pixel-y logo goes here?>`
+<img src="https://user-images.githubusercontent.com/914228/43900090-aaf02800-9b98-11e8-931e-c82e0c3ed44b.png" alt="" width="500px"></img>
 
 Analytics for your PICO-8 game, powered by Segment.
 
