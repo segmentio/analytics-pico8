@@ -4,6 +4,8 @@
 
 Analytics for your PICO-8 game, powered by Segment.
 
+See a video demo of a fully-instrumented Jelpi demo: [View Link](https://www.youtube.com/watch?v=_SQ2SiSPj5w)
+
 <br>
 
 ## Wait, what?
