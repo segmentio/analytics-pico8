@@ -6,7 +6,7 @@ Analytics for your PICO-8 game, powered by Segment.
 
 See a video demo of a fully-instrumented Jelpi demo: <a href="https://www.youtube.com/watch?v=_SQ2SiSPj5w" target="_blank"><code>View Link</code></a>
 
-> Note: I created this project for Segment Hack Week. Consider it alpha quality, since it doesn't support the functionality of [Segment's official sources](https://segment.com/docs/sources/).
+> *Note:* I created this project for Segment Hack Week. Consider it alpha quality, since it doesn't support the functionality of [Segment's official sources](https://segment.com/docs/sources/).
 
 <br>
 
@@ -66,7 +66,7 @@ Find your `<script>` tag in the generated HTML. It should look like this:
 <script async type="text/javascript" src="your_game.js"></script>
 ```
 
-Above it, insert the contents of [`track.html`](./track.html), then the [`analytics.js` snippet](https://segment.com/docs/sources/website/analytics.js/quickstart/) (in that order). Verify that a Segment write key is present – you should see it in the setup instructions.
+Above it, insert the contents of [`track.html`](./track.html), then the `analytics.js` snippet ([view here](https://segment.com/docs/sources/website/analytics.js/quickstart/)). Verify that your Segment write key is present – check the setup instructions for details.
 
 You can reference [`track_test.html`](./track_test.html) as an example.
 
